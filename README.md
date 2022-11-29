@@ -1,5 +1,5 @@
-About libjxl-split
-==================
+About libjxl
+============
 
 Home: https://jpeg.org/jpegxl/
 
@@ -43,10 +43,24 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_aarch64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18142&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libjxl-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18142&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libjxl-split-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18142&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libjxl-split-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -72,10 +86,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libjxl-green.svg)](https://anaconda.org/conda-forge/libjxl) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libjxl.svg)](https://anaconda.org/conda-forge/libjxl) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libjxl.svg)](https://anaconda.org/conda-forge/libjxl) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libjxl.svg)](https://anaconda.org/conda-forge/libjxl) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-libjxl--tools-green.svg)](https://anaconda.org/conda-forge/libjxl-tools) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libjxl-tools.svg)](https://anaconda.org/conda-forge/libjxl-tools) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libjxl-tools.svg)](https://anaconda.org/conda-forge/libjxl-tools) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libjxl-tools.svg)](https://anaconda.org/conda-forge/libjxl-tools) |
 
-Installing libjxl-split
-=======================
+Installing libjxl
+=================
 
-Installing `libjxl-split` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `libjxl` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -161,17 +175,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating libjxl-split-feedstock
-===============================
+Updating libjxl-feedstock
+=========================
 
-If you would like to improve the libjxl-split recipe or build a new
+If you would like to improve the libjxl recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/libjxl-split-feedstock are
+Note that all branches in the conda-forge/libjxl-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
