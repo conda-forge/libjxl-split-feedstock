@@ -133,3 +133,4 @@ about:
 extra:
   recipe-maintainers:
     - sshockwave
+  feedstock-name: libjxl
