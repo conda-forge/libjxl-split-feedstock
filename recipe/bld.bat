@@ -1,5 +1,7 @@
 setlocal EnableDelayedExpansion
 
+SET
+
 mkdir build
 cd build
 
