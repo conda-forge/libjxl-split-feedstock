@@ -10,8 +10,7 @@ source:
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
-  # No tags, versions, or stable ABIs are exposed in the
-  # [skcms repo](https://skia.googlesource.com/skcms/)
+  # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
     git_rev: b25b07b4b07990811de121c0356155b2ba0f4318
