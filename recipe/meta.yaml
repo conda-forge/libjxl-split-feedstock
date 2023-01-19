@@ -1,4 +1,4 @@
-{% set version = "0.7.0" %}
+{% set version = "0.8.0" %}
 
 package:
   name: libjxl-split
@@ -6,32 +6,30 @@ package:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
-    sha256: 3114bba1fabb36f6f4adc2632717209aa6f84077bc4e93b420e0d63fa0455c5e
+    sha256: 6b4c140c1738acbed6b7d22858e0526373f0e9938e3f6c0a6b8943189195aad1
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
-  # No tags, versions, or stable ABIs are exposed in the
-  # [skcms repo](https://skia.googlesource.com/skcms/)
+  # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
-    git_rev: 64374756e03700d649f897dbd98c95e78c30c7da
+    git_rev: b25b07b4b07990811de121c0356155b2ba0f4318
     folder: third_party/skcms
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
-    - {{ compiler('c') }}  # [not win]
-    - {{ compiler('cxx') }}  # [not win]
-    - clang  # [win]
-    - lld  # [win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - pkg-config
     - cmake >=3.10
-    - make
+    - make  # [not win]
   host:
     - brotli
     - libhwy
+    # lcms2 requires jpeg9, which is incompatible
     # - lcms2
     - giflib
     # Cannot be replaced with `jpeg`
@@ -50,13 +48,11 @@ outputs:
         - libbrotlicommon
     requirements:
       build:
-        - {{ compiler('c') }}  # [not win]
-        - {{ compiler('cxx') }}  # [not win]
-        - clang  # [win]
-        - lld  # [win]
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - pkg-config
         - cmake >=3.15
-        - make
+        - make  # [not win]
       host:
         - brotli
         - libhwy
@@ -81,13 +77,11 @@ outputs:
         - libbrotlidec
     requirements:
       build:
-        - {{ compiler('c') }}  # [not win]
-        - {{ compiler('cxx') }}  # [not win]
-        - clang  # [win]
-        - lld  # [win]
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
         - pkg-config
         - cmake >=3.15
-        - make
+        - make  # [not win]
       host:
         - brotli
         - libhwy
@@ -116,7 +110,7 @@ outputs:
 
 about:
   home: https://jpeg.org/jpegxl/
-  summary: 'JPEG XL image format reference implementation'
+  summary: JPEG XL image format reference implementation
   license: BSD-3-Clause
   license_family: BSD
   license_file:

@@ -4,7 +4,6 @@ mkdir build
 cd build
 
 cmake %CMAKE_ARGS% ^
-      -G "NMake Makefiles" ^
       -DCMAKE_FIND_ROOT_PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_C_COMPILER:STRING=clang-cl ^
@@ -27,5 +26,18 @@ cmake %CMAKE_ARGS% ^
       ..
 if errorlevel 1 exit 1
 
-cmake --build . -j%CPU_COUNT%
+:Add extern keyword to giflib
+set InputFile=%LIBRARY_INC%\gif_lib.h
+set OutputFile=tmp_gif_lib.h
+set "_strFind=const unsigned char XPORT GifAsciiTable8x8[][GIF_FONT_WIDTH];"
+set "_strInsert=extern const unsigned char XPORT GifAsciiTable8x8[][GIF_FONT_WIDTH];"
+
+>"%OutputFile%" (
+  for /f "usebackq delims=" %%A in ("%InputFile%") do (
+    if "%%A" equ "%_strFind%" (echo %_strInsert%) else (echo %%A)
+  )
+)
+MOVE /Y %OutputFile% %InputFile%
+
+cmake --build . -j%CPU_COUNT% --config Release
 if errorlevel 1 exit 1
