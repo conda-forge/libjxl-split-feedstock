@@ -29,6 +29,7 @@ requirements:
   host:
     - brotli
     - libhwy
+    # lcms2 requires jpeg9, which is incompatible
     # - lcms2
     - giflib
     # Cannot be replaced with `jpeg`
