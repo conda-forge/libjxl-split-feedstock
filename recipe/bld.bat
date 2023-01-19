@@ -4,7 +4,6 @@ mkdir build
 cd build
 
 cmake %CMAKE_ARGS% ^
-      -G "NMake Makefiles" ^
       -DCMAKE_FIND_ROOT_PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_C_COMPILER:STRING=clang-cl ^
