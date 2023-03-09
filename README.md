@@ -1,11 +1,11 @@
-About libjxl
-============
+About libjxl-feedstock
+======================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libjxl-split-feedstock/blob/main/LICENSE.txt)
 
 Home: https://jpeg.org/jpegxl/
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/libjxl-split-feedstock/blob/main/LICENSE.txt)
 
 Summary: JPEG XL image format reference implementation
 
