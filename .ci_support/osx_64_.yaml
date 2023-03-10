@@ -17,7 +17,7 @@ giflib:
 libhwy:
 - '1.0'
 libjpeg_turbo:
-- '2'
+- 2.1.5
 libpng:
 - '1.6'
 macos_machine:
