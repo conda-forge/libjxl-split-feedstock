@@ -12,8 +12,8 @@ source:
       - 0001-CHECK_EXCLUDE_LIBS.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
-  - url: https://skia.googlesource.com/skcms/+archive/42030a771244ba67f86b1c1c76a6493f873c5f91.tar.gz
-    sha256: 0c04020d1622781026ccc745dd637c7ad298a4c69a2017cc75909cf5d7488691
+  - git_url: https://skia.googlesource.com/skcms
+    git_rev: 42030a771244ba67f86b1c1c76a6493f873c5f91
     folder: third_party/skcms
 
 build:
