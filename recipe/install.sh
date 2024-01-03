@@ -3,8 +3,6 @@ set -ex
 cd build
 cmake --install .
 
-rm "${PREFIX}"/lib/libjxl*.a
-
 if [[ "${PKG_NAME}" == "libjxl" ]]
 then
   rm "${PREFIX}"/bin/cjxl
