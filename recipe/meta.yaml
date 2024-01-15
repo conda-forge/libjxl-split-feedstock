@@ -7,9 +7,9 @@ package:
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
     sha256: d83bbe188d8fa9725bb75109c922c37fcff8c3b802808f3a6c2c14aaf8337d9f
-    # patches:
+    patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
-      # - 0001-CHECK_EXCLUDE_LIBS.patch
+      - 0001-CHECK_EXCLUDE_LIBS.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
