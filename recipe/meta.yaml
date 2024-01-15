@@ -15,6 +15,9 @@ source:
   - git_url: https://skia.googlesource.com/skcms
     git_rev: 42030a771244ba67f86b1c1c76a6493f873c5f91
     folder: third_party/skcms
+  - git_url: https://github.com/webmproject/sjpeg.git
+    git_rev: e5ab13008bb214deb66d5f3e17ca2f8dbff150bf
+    folder: third_party/sjpeg
 
 build:
   number: 0
