@@ -15,7 +15,7 @@
  # appropriate version number. This script is also used to limit what's exposed
 --- lib/jxl_cms.cmake
 +++ lib/jxl_cms.cmake
-@@ -46,6 +46,2 @@
+@@ -46,6 +46,4 @@
  # Check whether the linker support excluding libs
  set(LINKER_EXCLUDE_LIBS_FLAG "-Wl,--exclude-libs=ALL")
 -include(CheckCSourceCompiles)
