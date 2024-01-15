@@ -1,6 +1,6 @@
 --- lib/jxl.cmake
 +++ lib/jxl.cmake
-@@ -576,10 +576,7 @@
+@@ -211,10 +211,8 @@
  
  # Check whether the linker support excluding libs
  set(LINKER_EXCLUDE_LIBS_FLAG "-Wl,--exclude-libs=ALL")
@@ -11,11 +11,12 @@
 +include(CheckCCompilerFlag)
 +check_c_compiler_flag("-Wl,--exclude-libs=ALL" LINKER_SUPPORT_EXCLUDE_LIBS)
  
- # Add a jxl.version file as a version script to tag symbols with the
- # appropriate version number. This script is also used to limit what's exposed
+ if(NOT BUILD_SHARED_LIBS)
+   target_compile_definitions(jxl PUBLIC -DJXL_STATIC_DEFINE)
 --- lib/jxl_cms.cmake
 +++ lib/jxl_cms.cmake
-@@ -46,6 +46,4 @@
+@@ -42,10 +42,8 @@
+ 
  # Check whether the linker support excluding libs
  set(LINKER_EXCLUDE_LIBS_FLAG "-Wl,--exclude-libs=ALL")
 -include(CheckCSourceCompiles)
@@ -24,3 +25,6 @@
 -list(REMOVE_ITEM CMAKE_EXE_LINKER_FLAGS ${LINKER_EXCLUDE_LIBS_FLAG})
 +include(CheckCCompilerFlag)
 +check_c_compiler_flag("-Wl,--exclude-libs=ALL" LINKER_SUPPORT_EXCLUDE_LIBS)
+ 
+ if(LINKER_SUPPORT_EXCLUDE_LIBS)
+   set_property(TARGET jxl_cms APPEND_STRING PROPERTY
