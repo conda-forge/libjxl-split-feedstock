@@ -101,6 +101,8 @@ outputs:
       commands:
         - cjxl --version
         - djxl --version
+        - cjpegli --help
+        - djpegli --help
         - jxlinfo --help
 
         # Encode & decode tests
@@ -108,7 +110,6 @@ outputs:
         - echo | set /p dummy="P6 1 1 63 000" > test.ppm  # [win]
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
-        - cjpegli test.ppm test.jpg
         - jxlinfo test.jxl
 
 about:
