@@ -9,7 +9,7 @@
 -check_c_source_compiles("int main(){return 0;}" LINKER_SUPPORT_EXCLUDE_LIBS)
 -list(REMOVE_ITEM CMAKE_EXE_LINKER_FLAGS ${LINKER_EXCLUDE_LIBS_FLAG})
 +include(CheckLinkerFlag)
-+check_linker_flag(C "Wl,--exclude-libs=ALL" LINKER_SUPPORTS_EXCLUDE_LIBS)
++check_linker_flag(C "--exclude-libs=ALL" LINKER_SUPPORTS_EXCLUDE_LIBS)
  
  if(NOT BUILD_SHARED_LIBS)
    target_compile_definitions(jxl PUBLIC -DJXL_STATIC_DEFINE)
@@ -24,7 +24,7 @@
 -check_c_source_compiles("int main(){return 0;}" LINKER_SUPPORT_EXCLUDE_LIBS)
 -list(REMOVE_ITEM CMAKE_EXE_LINKER_FLAGS ${LINKER_EXCLUDE_LIBS_FLAG})
 +include(CheckLinkerFlag)
-+check_linker_flag(C "Wl,--exclude-libs=ALL" LINKER_SUPPORTS_EXCLUDE_LIBS)
++check_linker_flag(C "--exclude-libs=ALL" LINKER_SUPPORTS_EXCLUDE_LIBS)
  
  if(LINKER_SUPPORT_EXCLUDE_LIBS)
    set_property(TARGET jxl_cms APPEND_STRING PROPERTY
