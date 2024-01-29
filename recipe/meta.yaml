@@ -110,6 +110,8 @@ outputs:
         - echo | set /p dummy="P6 1 1 63 000" > test.ppm  # [win]
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
+        - cjpegli test.ppm test.jpg
+        - djpegli test.jpg test.ppm
         - jxlinfo test.jxl
 
 about:
