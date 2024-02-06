@@ -41,5 +41,5 @@ set "_strInsert=extern const unsigned char XPORT GifAsciiTable8x8[][GIF_FONT_WID
 )
 MOVE /Y %OutputFile% %InputFile%
 
-cmake --build . -j%CPU_COUNT% --config Release
+cmake --build . --config Release
 if errorlevel 1 exit 1
