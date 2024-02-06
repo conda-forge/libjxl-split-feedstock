@@ -11,7 +11,7 @@ cmake %CMAKE_ARGS% ^
       -DCMAKE_LINKER:STRING=lld-link ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DBUILD_TESTING:BOOL=OFF ^
-      -DBUILD_SHARED_LIBS:BOOL=ON ^
+      -DBUILD_SHARED_LIBS:BOOL=OFF ^
       -DJPEGXL_ENABLE_TOOLS:BOOL=ON ^
       -DJPEGXL_ENABLE_JPEGLI:BOOL=ON ^
       -DJPEGXL_ENABLE_JPEGLI_LIBJPEG:BOOL=OFF ^
@@ -41,5 +41,5 @@ set "_strInsert=extern const unsigned char XPORT GifAsciiTable8x8[][GIF_FONT_WID
 )
 MOVE /Y %OutputFile% %InputFile%
 
-cmake --build . --config Release
+cmake --build . -j%CPU_COUNT% --config Release
 if errorlevel 1 exit 1
