@@ -2,8 +2,6 @@ set -ex
 
 if [[ "${target_platform}" == linux-* ]]
 then
-    # librt is required before glibc 2.17
-    LDFLAGS="-lrt ${LDFLAGS}"
     # https://github.com/google/highway/pull/524#issuecomment-1025676250
     CXXFLAGS="-D__STDC_FORMAT_MACROS ${CXXFLAGS}"
 elif [[ "${target_platform}" == osx-* ]]
