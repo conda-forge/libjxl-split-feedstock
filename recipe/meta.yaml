@@ -1,4 +1,4 @@
-{% set version = "0.9.1" %}
+{% set version = "0.9.2" %}
 
 package:
   name: libjxl-split
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
-    sha256: a0e72e9ece26878147069ad4888ac3382021d4bbee71c2e1b687d5bde7fd7e01
+    sha256: bf28e411d84c50578ab74107cdd624e099313129883a43907c261e8116a11b3b
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
