@@ -1,4 +1,4 @@
-{% set version = "0.10.0" %}
+{% set version = "0.10.1" %}
 {% set jpeg_turbo_version = "8ecba3647edb6dd940463fedf38ca33a8e2a73d1" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
-    sha256: ab32d52b033c814d24762db4942a3b45315d9db37bf5c8a9741ccc1bb0a52d97
+    sha256: 91b9a83a230d608b5d35d2ab5068bd0ec7028797575e3013211be5928028c8cd
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
