@@ -8,6 +8,8 @@ cxx_compiler:
 - vs2019
 giflib:
 - '5.2'
+jpeg:
+- '9'
 libhwy:
 - '1.0'
 libjpeg_turbo:
