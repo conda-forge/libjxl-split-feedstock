@@ -16,6 +16,10 @@ source:
   - git_url: https://skia.googlesource.com/skcms
     git_rev: 42030a771244ba67f86b1c1c76a6493f873c5f91
     folder: third_party/skcms
+  # They pull in 3 headers from here and copy them into jpegli
+  - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{{ jpeg_turbo_version }}.tar.gz
+    sha256: ed729127097af5000bfeddc6b3e679c4363bb1618ebfc07efb6b47f576471b4b
+    folder: third_party/libjpeg-turbo
 
 build:
   number: 1
