@@ -32,8 +32,6 @@ requirements:
     - libhwy
     - lcms2
     - giflib
-    # Cannot be replaced with `jpeg`
-    # since jpeg_mem_* api is different
     - libjpeg-turbo
     - openexr
     - libpng
@@ -81,7 +79,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - pkg-config
-        - cmake >=3.15
+        - cmake
         - make  # [not win]
       host:
         - brotli
