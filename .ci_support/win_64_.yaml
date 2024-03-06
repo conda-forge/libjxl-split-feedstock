@@ -10,8 +10,10 @@ giflib:
 - '5.2'
 jpeg:
 - '9'
+lcms2:
+- '2'
 libhwy:
-- '1.0'
+- '1.1'
 libjpeg_turbo:
 - '3'
 libpng:
