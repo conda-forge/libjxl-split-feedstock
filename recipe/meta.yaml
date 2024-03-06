@@ -21,20 +21,19 @@ source:
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - pkg-config
-    - cmake >=3.10
+    - cmake
     - make  # [not win]
   host:
     - brotli
     - libhwy
-    # lcms2 requires jpeg9, which is incompatible
-    # - lcms2
+    - lcms2
     - giflib
     # Cannot be replaced with `jpeg`
     # since jpeg_mem_* api is different
@@ -60,6 +59,7 @@ outputs:
       host:
         - brotli
         - libhwy
+        - lcms2
     script: install.sh  # [not win]
     script: install.bat  # [win]
     test:
