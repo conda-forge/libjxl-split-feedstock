@@ -63,7 +63,7 @@ outputs:
         - libhwy
         - lcms2
     script: install.sh  # [not win]
-    script: install.bat  # [win]
+    script: install_libjxl.bat  # [win]
     test:
       commands:
         - test -f "$PREFIX"/include/jxl/encode.h  # [not win]
@@ -99,7 +99,7 @@ outputs:
       run:
         - {{ pin_subpackage('libjxl', exact=True) }}
     script: install.sh  # [not win]
-    script: install.bat  # [win]
+    script: install_tools.bat  # [win]
     test:
       commands:
         - cjxl --version

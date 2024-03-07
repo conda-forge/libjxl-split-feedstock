@@ -1,5 +1,4 @@
-setlocal EnableDelayedExpansion
-
+@ECHO ON
 mkdir build
 cd build
 
@@ -27,4 +26,7 @@ cmake %CMAKE_ARGS% ^
 if errorlevel 1 exit 1
 
 cmake --build . -j%CPU_COUNT% --config Release
+if errorlevel 1 exit 1
+
+cmake --install . --prefix "%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
