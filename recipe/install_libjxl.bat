@@ -1,5 +1,4 @@
-setlocal EnableDelayedExpansion
-
+@ECHO ON
 mkdir build
 cd build
 
@@ -8,8 +7,8 @@ cmake %CMAKE_ARGS% ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DBUILD_TESTING:BOOL=OFF ^
-      -DBUILD_SHARED_LIBS:BOOL=OFF ^
-      -DJPEGXL_ENABLE_TOOLS:BOOL=ON ^
+      -DBUILD_SHARED_LIBS:BOOL=ON ^
+      -DJPEGXL_ENABLE_TOOLS:BOOL=OFF ^
       -DJPEGXL_ENABLE_JPEGLI:BOOL=ON ^
       -DJPEGXL_ENABLE_JPEGLI_LIBJPEG:BOOL=OFF ^
       -DJPEGXL_ENABLE_DOXYGEN:BOOL=OFF ^
@@ -22,8 +21,12 @@ cmake %CMAKE_ARGS% ^
       -DJPEGXL_STATIC:BOOL=OFF ^
       -DJPEGXL_FORCE_SYSTEM_BROTLI:BOOL=ON ^
       -DJPEGXL_FORCE_SYSTEM_HWY:BOOL=ON ^
+      -DJPEGXL_FORCE_SYSTEM_LCMS2:BOOL=ON ^
       ..
 if errorlevel 1 exit 1
 
 cmake --build . -j%CPU_COUNT% --config Release
+if errorlevel 1 exit 1
+
+cmake --install . --prefix "%LIBRARY_PREFIX%"
 if errorlevel 1 exit 1
