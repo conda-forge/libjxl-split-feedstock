@@ -61,7 +61,6 @@ outputs:
       host:
         - brotli
         - libhwy
-        - lcms2
     script: install.sh  # [not win]
     script: install.bat  # [win]
     test:
