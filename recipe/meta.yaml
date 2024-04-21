@@ -1,4 +1,4 @@
-{% set version = "0.10.1" %}
+{% set version = "0.10.2" %}
 {% set jpeg_turbo_version = "8ecba3647edb6dd940463fedf38ca33a8e2a73d1" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
-    sha256: 91b9a83a230d608b5d35d2ab5068bd0ec7028797575e3013211be5928028c8cd
+    sha256: 95e807f63143856dc4d161c071cca01115d2c6405b3d3209854ac6989dc6bb91
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
@@ -16,28 +16,28 @@ source:
   - git_url: https://skia.googlesource.com/skcms
     git_rev: 42030a771244ba67f86b1c1c76a6493f873c5f91
     folder: third_party/skcms
+  # They pull in 3 headers from here and copy them into jpegli
   - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{{ jpeg_turbo_version }}.tar.gz
     sha256: ed729127097af5000bfeddc6b3e679c4363bb1618ebfc07efb6b47f576471b4b
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 1
+  number: 0
+  # it seems that ppc64le triggers an internal compiler error
+  # https://github.com/conda-forge/libjxl-split-feedstock/issues/20
+  skip: true  # [ppc64le]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - pkg-config
-    - cmake >=3.10
+    - cmake
     - make  # [not win]
   host:
     - brotli
     - libhwy
-    # lcms2 requires jpeg9, which is incompatible
-    # - lcms2
     - giflib
-    # Cannot be replaced with `jpeg`
-    # since jpeg_mem_* api is different
     - libjpeg-turbo
     - openexr
     - libpng
@@ -84,7 +84,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - pkg-config
-        - cmake >=3.15
+        - cmake
         - make  # [not win]
       host:
         - brotli
