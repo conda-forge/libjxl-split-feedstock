@@ -50,8 +50,6 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
-      ignore_run_exports:
-        - libbrotlicommon
     requirements:
       build:
         - {{ compiler('c') }}
@@ -78,10 +76,6 @@ outputs:
         - test ! -f "$PREFIX"/lib/libjxl.a  # [not win]
         # - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1  # [win]
   - name: libjxl-tools
-    build:
-      ignore_run_exports:
-        - libbrotlicommon
-        - libbrotlidec
     requirements:
       build:
         - {{ compiler('c') }}
