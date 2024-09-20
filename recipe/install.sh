@@ -5,6 +5,7 @@ cmake --install .
 
 if [[ "${PKG_NAME}" == "libjxl" ]]
 then
+  rm "${PREFIX}"/lib/libjxl_extras_codec"${SHLIB_EXT}".*
   rm "${PREFIX}"/bin/cjxl
   rm "${PREFIX}"/bin/djxl
   rm "${PREFIX}"/bin/cjpegli
