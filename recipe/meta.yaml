@@ -1,4 +1,5 @@
-{% set version = "0.10.3" %}
+{% set version = "0.11.0" %}
+{% set skcms_version = "42030a771244ba67f86b1c1c76a6493f873c5f91" %}
 {% set jpeg_turbo_version = "8ecba3647edb6dd940463fedf38ca33a8e2a73d1" %}
 
 package:
@@ -7,14 +8,14 @@ package:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
-    sha256: e0191411cfcd927eebe5392d030fe4283fe27ba1685ab7265104936e0b4283a6
+    sha256: 7ce4ec8bb37a435a73ac18c4c9ff56c2dc6c98892bf3f53a328e3eca42efb9cf
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
-    git_rev: 42030a771244ba67f86b1c1c76a6493f873c5f91
+    git_rev: {{ skcms_version }}
     folder: third_party/skcms
   # They pull in 3 headers from here and copy them into jpegli
   - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{{ jpeg_turbo_version }}.tar.gz
@@ -80,7 +81,6 @@ outputs:
     build:
       ignore_run_exports:
         - libbrotlicommon
-        - libbrotlidec
     requirements:
       build:
         - {{ compiler('c') }}
@@ -130,7 +130,7 @@ about:
     called libjxl. This software library is used by many applications that support JPEG XL.
 
     `libjxl` provides the core library.
-    For `cjxl`, `djxl`, and other tools, use `libjxl-tools`.
+    For `cjxl`, `djxl`, `libjxl_extras_codec`, and other tools, use `libjxl-tools`.
 
 extra:
   recipe-maintainers:
