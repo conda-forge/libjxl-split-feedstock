@@ -1,0 +1,4 @@
+c_compiler:
+  - clang  # [ppc64le]
+cxx_compiler:
+  - clangxx  # [ppc64le]
