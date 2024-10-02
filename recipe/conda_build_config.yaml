@@ -1,4 +1,8 @@
 c_compiler:
-  - clang  # [ppc64le]
+  - clang    # [ppc64le]
+c_compiler_version:
+  - 18       # [ppc64le]
 cxx_compiler:
   - clangxx  # [ppc64le]
+cxx_compiler_version:
+  - 18       # [ppc64le]
