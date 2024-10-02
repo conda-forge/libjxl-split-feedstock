@@ -15,7 +15,7 @@ This repository contains a reference implementation of JPEG XL (encoder and deco
 called libjxl. This software library is used by many applications that support JPEG XL.
 
 `libjxl` provides the core library.
-For `cjxl`, `djxl`, and other tools, use `libjxl-tools`.
+For `cjxl`, `djxl`, `libjxl_extras_codec`, and other tools, use `libjxl-tools`.
 
 
 Current build status
@@ -201,7 +201,4 @@ Feedstock Maintainers
 =====================
 
 * [@sshockwave](https://github.com/sshockwave/)
-
-
-<!-- dummy commit to enable rerendering -->
 
