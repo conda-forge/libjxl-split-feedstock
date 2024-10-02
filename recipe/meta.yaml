@@ -23,10 +23,7 @@ source:
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 0
-  # it seems that ppc64le triggers an internal compiler error
-  # https://github.com/conda-forge/libjxl-split-feedstock/issues/20
-  skip: true  # [ppc64le]
+  number: 1
 
 requirements:
   build:
