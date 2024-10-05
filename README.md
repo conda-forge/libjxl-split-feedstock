@@ -15,7 +15,7 @@ This repository contains a reference implementation of JPEG XL (encoder and deco
 called libjxl. This software library is used by many applications that support JPEG XL.
 
 `libjxl` provides the core library.
-For `cjxl`, `djxl`, and other tools, use `libjxl-tools`.
+For `cjxl`, `djxl`, `libjxl_extras_codec`, and other tools, use `libjxl-tools`.
 
 
 Current build status
@@ -47,6 +47,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18142&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libjxl-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=18142&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/libjxl-split-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_" alt="variant">
                 </a>
               </td>
             </tr><tr>
