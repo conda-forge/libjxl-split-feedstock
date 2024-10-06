@@ -21,4 +21,4 @@ cmake ${CMAKE_ARGS} \
     -DJPEGXL_FORCE_SYSTEM_BROTLI:BOOL=ON \
     -DJPEGXL_FORCE_SYSTEM_HWY:BOOL=ON \
     ..
-cmake --build . --target install -- --parallel "${CPU_COUNT}"
+cmake --build . --target install --parallel "${CPU_COUNT}"
