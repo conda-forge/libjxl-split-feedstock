@@ -1,16 +1,5 @@
 set -ex
 
-if [[ "${target_platform}" == linux-* ]]
-then
-    # https://github.com/google/highway/pull/524#issuecomment-1025676250
-    CXXFLAGS="-D__STDC_FORMAT_MACROS ${CXXFLAGS}"
-elif [[ "${target_platform}" == osx-* ]]
-then
-    # Sized deallocation requires MacOS SDK 10.12+
-    # https://conda-forge.org/docs/maintainer/knowledge_base.html#newer-c-features-with-old-sdk
-    CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY ${CXXFLAGS}"
-fi
-
 cd build
 
 cmake ${CMAKE_ARGS} \
