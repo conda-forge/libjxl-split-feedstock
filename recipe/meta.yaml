@@ -24,27 +24,15 @@ source:
 
 build:
   number: 1
-
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
-    - pkg-config
-    - cmake
-    - make  # [not win]
-  host:
-    - brotli
-    - libhwy
-    - giflib
-    - libjpeg-turbo
-    - openexr
-    - libpng
-    - zlib  # by libpng
+  # overrides the default build script
+  script:
+    - mkdir build
 
 outputs:
   - name: libjxl
     build:
+      script_env:
+        - JPEGXL_ENABLE_TOOLS=OFF
       run_exports:
         - {{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
       ignore_run_exports:
@@ -55,13 +43,13 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - pkg-config
-        - cmake >=3.15
+        - cmake >=3.16
         - make  # [not win]
       host:
         - brotli
         - libhwy
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
+    script: build.sh  # [not win]
+    script: bld.bat  # [win]
     test:
       commands:
         - test -f "$PREFIX"/include/jxl/encode.h  # [not win]
@@ -76,6 +64,8 @@ outputs:
         # - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1  # [win]
   - name: libjxl-tools
     build:
+      script_env:
+        - JPEGXL_ENABLE_TOOLS=ON
       ignore_run_exports:
         - libbrotlicommon
     requirements:
@@ -93,11 +83,12 @@ outputs:
         - libjpeg-turbo
         - openexr
         - libpng
+        - zlib  # by libpng
         - {{ pin_subpackage('libjxl', exact=True) }}
       run:
         - {{ pin_subpackage('libjxl', exact=True) }}
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
+    script: build.sh  # [not win]
+    script: bld.bat  # [win]
     test:
       commands:
         - cjxl --version

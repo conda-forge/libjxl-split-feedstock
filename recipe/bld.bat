@@ -1,6 +1,5 @@
 setlocal EnableDelayedExpansion
 
-mkdir build
 cd build
 
 cmake %CMAKE_ARGS% ^
@@ -9,7 +8,7 @@ cmake %CMAKE_ARGS% ^
       -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DBUILD_TESTING:BOOL=OFF ^
       -DBUILD_SHARED_LIBS:BOOL=ON ^
-      -DJPEGXL_ENABLE_TOOLS:BOOL=ON ^
+      -DJPEGXL_ENABLE_TOOLS:BOOL="%JPEGXL_ENABLE_TOOLS%" ^
       -DJPEGXL_ENABLE_JPEGLI:BOOL=ON ^
       -DJPEGXL_ENABLE_JPEGLI_LIBJPEG:BOOL=OFF ^
       -DJPEGXL_ENABLE_DOXYGEN:BOOL=OFF ^
@@ -25,5 +24,5 @@ cmake %CMAKE_ARGS% ^
       ..
 if errorlevel 1 exit 1
 
-cmake --build . -j%CPU_COUNT% --config Release
+cmake --build . --target install -- --parallel "%CPU_COUNT%"
 if errorlevel 1 exit 1
