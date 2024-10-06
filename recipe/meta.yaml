@@ -11,7 +11,7 @@ source:
     sha256: 7ce4ec8bb37a435a73ac18c4c9ff56c2dc6c98892bf3f53a328e3eca42efb9cf
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
-      - 0001-CHECK_EXCLUDE_LIBS.patch # [osx]
+      - 0001-CHECK_EXCLUDE_LIBS.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
