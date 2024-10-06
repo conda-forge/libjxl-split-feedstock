@@ -64,6 +64,7 @@ outputs:
         - JPEGXL_ENABLE_TOOLS=ON
       ignore_run_exports:
         - libbrotlicommon
+        - libzlib
     requirements:
       build:
         - {{ compiler('c') }}
