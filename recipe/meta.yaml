@@ -24,7 +24,6 @@ source:
 
 build:
   number: 2
-  # overrides the default build script
   script:
     - mkdir build
 
@@ -48,8 +47,8 @@ outputs:
       host:
         - brotli
         - libhwy
-    script: build.sh  # [not win]
-    script: bld.bat  # [win]
+    script: install.sh  # [not win]
+    script: install.bat  # [win]
     test:
       commands:
         - test -f "$PREFIX"/include/jxl/encode.h  # [not win]
@@ -87,8 +86,8 @@ outputs:
         - {{ pin_subpackage('libjxl', exact=True) }}
       run:
         - {{ pin_subpackage('libjxl', exact=True) }}
-    script: build.sh  # [not win]
-    script: bld.bat  # [win]
+    script: install.sh  # [not win]
+    script: install.bat  # [win]
     test:
       commands:
         - cjxl --version
