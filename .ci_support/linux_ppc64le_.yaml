@@ -29,7 +29,7 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 openexr:
-- '3.2'
+- '3.3'
 target_platform:
 - linux-ppc64le
 zip_keys:
