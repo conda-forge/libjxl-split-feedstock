@@ -24,27 +24,14 @@ source:
 
 build:
   number: 2
-
-requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
-    - pkg-config
-    - cmake
-    - make  # [not win]
-  host:
-    - brotli
-    - libhwy
-    - giflib
-    - libjpeg-turbo
-    - openexr
-    - libpng
-    - zlib  # by libpng
+  script:
+    - mkdir build
 
 outputs:
   - name: libjxl
     build:
+      script_env:
+        - JPEGXL_ENABLE_TOOLS=OFF
       run_exports:
         - {{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
       ignore_run_exports:
@@ -55,7 +42,7 @@ outputs:
         - {{ stdlib("c") }}
         - {{ compiler('cxx') }}
         - pkg-config
-        - cmake >=3.15
+        - cmake >=3.16
         - make  # [not win]
       host:
         - brotli
@@ -68,16 +55,19 @@ outputs:
         - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"  # [not win]
         - test ! -f "$PREFIX"/bin/cjxl  # [not win]
         - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1  # [win]
-        # - if not exist %LIBRARY_BIN%\\jxl.dll exit 1  # [win]
+        - if not exist %LIBRARY_BIN%\\jxl.dll exit 1  # [win]
         - if exist %LIBRARY_BIN%\\cjxl.exe exit 1  # [win]
 
         # CFEP-18: Static libs shouldn't be part of the main package
         - test ! -f "$PREFIX"/lib/libjxl.a  # [not win]
-        # - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1  # [win]
+        - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1  # [win]
   - name: libjxl-tools
     build:
+      script_env:
+        - JPEGXL_ENABLE_TOOLS=ON
       ignore_run_exports:
         - libbrotlicommon
+        - libzlib
     requirements:
       build:
         - {{ compiler('c') }}
@@ -93,6 +83,7 @@ outputs:
         - libjpeg-turbo
         - openexr
         - libpng
+        - zlib  # by libpng
         - {{ pin_subpackage('libjxl', exact=True) }}
       run:
         - {{ pin_subpackage('libjxl', exact=True) }}

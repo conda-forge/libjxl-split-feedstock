@@ -1,17 +1,24 @@
 set -ex
 
 cd build
-cmake --install .
 
-if [[ "${PKG_NAME}" == "libjxl" ]]
-then
-  # These targets link with extra codec libraries
-  # for conversion to & from other image formats
-  # and are not required by the core `libjxl` library.
-  rm "${PREFIX}"/lib/libjxl_extras_codec.a
-  rm "${PREFIX}"/bin/cjxl
-  rm "${PREFIX}"/bin/djxl
-  rm "${PREFIX}"/bin/cjpegli
-  rm "${PREFIX}"/bin/djpegli
-  rm "${PREFIX}"/bin/jxlinfo
-fi
+cmake ${CMAKE_ARGS} \
+    -DCMAKE_FIND_FRAMEWORK:STRING=NEVER \
+    -DCMAKE_FIND_APPBUNDLE:STRING=NEVER \
+    -DBUILD_TESTING:BOOL=OFF \
+    -DBUILD_SHARED_LIBS:BOOL=ON \
+    -DJPEGXL_ENABLE_TOOLS:BOOL="${JPEGXL_ENABLE_TOOLS}" \
+    -DJPEGXL_ENABLE_JPEGLI:BOOL=ON \
+    -DJPEGXL_ENABLE_JPEGLI_LIBJPEG:BOOL=OFF \
+    -DJPEGXL_ENABLE_DOXYGEN:BOOL=OFF \
+    -DJPEGXL_ENABLE_MANPAGES:BOOL=OFF \
+    -DJPEGXL_ENABLE_BENCHMARK:BOOL=OFF \
+    -DJPEGXL_ENABLE_EXAMPLES:BOOL=OFF \
+    -DJPEGXL_BUNDLE_LIBPNG:BOOL=OFF \
+    -DJPEGXL_ENABLE_SJPEG:BOOL=OFF \
+    -DJPEGXL_ENABLE_SKCMS:BOOL=ON \
+    -DJPEGXL_STATIC:BOOL=OFF \
+    -DJPEGXL_FORCE_SYSTEM_BROTLI:BOOL=ON \
+    -DJPEGXL_FORCE_SYSTEM_HWY:BOOL=ON \
+    ..
+cmake --build . --target install --parallel "${CPU_COUNT}"
