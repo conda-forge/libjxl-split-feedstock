@@ -5,7 +5,6 @@ cd build
 cmake %CMAKE_ARGS% ^
       -DCMAKE_FIND_ROOT_PATH="%LIBRARY_PREFIX%" ^
       -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
-      -DCMAKE_BUILD_TYPE:STRING=Release ^
       -DBUILD_TESTING:BOOL=OFF ^
       -DBUILD_SHARED_LIBS:BOOL=ON ^
       -DJPEGXL_ENABLE_TOOLS:BOOL="%JPEGXL_ENABLE_TOOLS%" ^
@@ -24,5 +23,5 @@ cmake %CMAKE_ARGS% ^
       ..
 if errorlevel 1 exit 1
 
-cmake --build . --target install --parallel "%CPU_COUNT%"
+cmake --build . --config Release --target install --parallel "%CPU_COUNT%"
 if errorlevel 1 exit 1
