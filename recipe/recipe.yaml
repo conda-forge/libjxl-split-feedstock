@@ -4,6 +4,7 @@ context:
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
 recipe:
+  name: libjxl-split
   version: ${{ version }}
 
 source:
@@ -50,20 +51,20 @@ outputs:
         - brotli
         - libhwy
     test:
-      commands:
-        - if: win
-          then:
-            - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
-            - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
-            - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
-          else:
-            - test -f "$PREFIX"/include/jxl/encode.h
-            - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
-            - test ! -f "$PREFIX"/bin/cjxl
-        # CFEP-18: Static libs shouldn't be part of the main package
-        - if: win
-          then: if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
-          else: test ! -f "$PREFIX"/lib/libjxl.a
+      - script:
+          - if: win
+            then:
+              - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
+              - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
+              - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
+            else:
+              - test -f "$PREFIX"/include/jxl/encode.h
+              - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
+              - test ! -f "$PREFIX"/bin/cjxl
+          # CFEP-18: Static libs shouldn't be part of the main package
+          - if: win
+            then: if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
+            else: test ! -f "$PREFIX"/lib/libjxl.a
 
   - name: libjxl-tools
     build:
@@ -94,23 +95,23 @@ outputs:
       run:
         - ${{ pin_subpackage("libjxl", exact=True) }}
     test:
-      commands:
-        - cjxl --version
-        - djxl --version
-        - cjpegli --help
-        - djpegli --help
-        - jxlinfo --help
+      - script:
+          - cjxl --version
+          - djxl --version
+          - cjpegli --help
+          - djpegli --help
+          - jxlinfo --help
 
-        # Encode & decode tests
-        - if: win
-          then: echo | set /p dummy="P6 1 1 63 000" > test.ppm
-          else: printf "P6 1 1 63 000" > test.ppm
-        - cjxl test.ppm test.jxl
-        - djxl test.jxl test.ppm
-        - jxlinfo test.jxl
+          # Encode & decode tests
+          - if: win
+            then: echo | set /p dummy="P6 1 1 63 000" > test.ppm
+            else: printf "P6 1 1 63 000" > test.ppm
+          - cjxl test.ppm test.jxl
+          - djxl test.jxl test.ppm
+          - jxlinfo test.jxl
 
 about:
-  home: https://jpeg.org/jpegxl/
+  homepage: https://jpeg.org/jpegxl/
   summary: JPEG XL image format reference implementation
   license: BSD-3-Clause
   license_family: BSD
