@@ -34,7 +34,7 @@ outputs:
       script_env:
         - JPEGXL_ENABLE_TOOLS=OFF
       run_exports:
-        - {{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
+        - ${{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
       ignore_run_exports:
         - libbrotlicommon
     requirements:
