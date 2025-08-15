@@ -3,8 +3,7 @@ context:
   skcms_version: "42030a771244ba67f86b1c1c76a6493f873c5f91"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
-package:
-  name: libjxl-split
+recipe:
   version: ${{ version }}
 
 source:
@@ -37,6 +36,7 @@ outputs:
         - ${{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
       ignore_run_exports:
         - libbrotlicommon
+      script: install
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -49,10 +49,6 @@ outputs:
       host:
         - brotli
         - libhwy
-    script:
-      if: win
-      then: install.bat
-      else: install.sh
     test:
       commands:
         - if: win
@@ -76,6 +72,7 @@ outputs:
       ignore_run_exports:
         - libbrotlicommon
         - libzlib
+      script: install
     requirements:
       build:
         - ${{ compiler("c") }}
@@ -96,10 +93,6 @@ outputs:
         - ${{ pin_subpackage("libjxl", exact=True) }}
       run:
         - ${{ pin_subpackage("libjxl", exact=True) }}
-    script:
-      if: win
-      then: install.bat
-      else: install.sh
     test:
       commands:
         - cjxl --version
