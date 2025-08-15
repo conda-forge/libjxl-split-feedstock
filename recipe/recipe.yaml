@@ -29,7 +29,8 @@ build:
     - mkdir build
 
 outputs:
-  - name: libjxl
+  - package:
+      name: libjxl
     build:
       script_env:
         - JPEGXL_ENABLE_TOOLS=OFF
@@ -66,7 +67,8 @@ outputs:
             then: if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
             else: test ! -f "$PREFIX"/lib/libjxl.a
 
-  - name: libjxl-tools
+  - package:
+      name: libjxl-tools
     build:
       script_env:
         - JPEGXL_ENABLE_TOOLS=ON
