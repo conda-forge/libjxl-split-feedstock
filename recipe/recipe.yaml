@@ -35,7 +35,7 @@ outputs:
       script_env:
         - JPEGXL_ENABLE_TOOLS=OFF
       run_exports:
-        - ${{ pin_subpackage('libjxl', min_pin='x.x', max_pin='x.x') }}
+        - ${{ pin_subpackage('libjxl', lower_bound='x.x', upper_bound='x.x') }}
       ignore_run_exports:
         - libbrotlicommon
       script: install
@@ -51,7 +51,7 @@ outputs:
       host:
         - brotli
         - libhwy
-    test:
+    tests:
       - script:
           - if: win
             then:
@@ -96,7 +96,7 @@ outputs:
         - ${{ pin_subpackage("libjxl", exact=True) }}
       run:
         - ${{ pin_subpackage("libjxl", exact=True) }}
-    test:
+    tests:
       - script:
           - cjxl --version
           - djxl --version
