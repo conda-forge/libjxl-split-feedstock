@@ -23,7 +23,7 @@ source:
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 2
+  number: 3
   script:
     - mkdir build
 
