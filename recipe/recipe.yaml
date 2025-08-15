@@ -1,13 +1,14 @@
-{% set version = "0.11.1" %}
-{% set skcms_version = "42030a771244ba67f86b1c1c76a6493f873c5f91" %}
-{% set jpeg_turbo_version = "8ecba3647edb6dd940463fedf38ca33a8e2a73d1" %}
+context:
+  version: "0.11.1"
+  skcms_version: "42030a771244ba67f86b1c1c76a6493f873c5f91"
+  jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
 package:
   name: libjxl-split
-  version: {{ version }}
+  version: ${{ version }}
 
 source:
-  - url: https://github.com/libjxl/libjxl/archive/v{{ version }}.tar.gz
+  - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
     sha256: 1492dfef8dd6c3036446ac3b340005d92ab92f7d48ee3271b5dac1d36945d3d9
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
@@ -15,15 +16,15 @@ source:
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
-    git_rev: {{ skcms_version }}
+    git_rev: ${{ skcms_version }}
     folder: third_party/skcms
   # They pull in 3 headers from here and copy them into jpegli
-  - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/{{ jpeg_turbo_version }}.tar.gz
+  - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${{ jpeg_turbo_version }}.tar.gz
     sha256: ed729127097af5000bfeddc6b3e679c4363bb1618ebfc07efb6b47f576471b4b
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 3
+  number: 4
   script:
     - mkdir build
 
@@ -38,29 +39,36 @@ outputs:
         - libbrotlicommon
     requirements:
       build:
-        - {{ compiler('c') }}
-        - {{ stdlib("c") }}
-        - {{ compiler('cxx') }}
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - pkg-config
         - cmake >=3.16
-        - make  # [not win]
+        - if: not win
+          then: make
       host:
         - brotli
         - libhwy
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
+    script:
+      if: win
+      then: install.bat
+      else: install.sh
     test:
       commands:
-        - test -f "$PREFIX"/include/jxl/encode.h  # [not win]
-        - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"  # [not win]
-        - test ! -f "$PREFIX"/bin/cjxl  # [not win]
-        - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1  # [win]
-        - if not exist %LIBRARY_BIN%\\jxl.dll exit 1  # [win]
-        - if exist %LIBRARY_BIN%\\cjxl.exe exit 1  # [win]
-
+        - if: win
+          then:
+            - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
+            - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
+            - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
+          else:
+            - test -f "$PREFIX"/include/jxl/encode.h
+            - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
+            - test ! -f "$PREFIX"/bin/cjxl
         # CFEP-18: Static libs shouldn't be part of the main package
-        - test ! -f "$PREFIX"/lib/libjxl.a  # [not win]
-        - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1  # [win]
+        - if: win
+          then: if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
+          else: test ! -f "$PREFIX"/lib/libjxl.a
+
   - name: libjxl-tools
     build:
       script_env:
@@ -70,12 +78,13 @@ outputs:
         - libzlib
     requirements:
       build:
-        - {{ compiler('c') }}
-        - {{ stdlib("c") }}
-        - {{ compiler('cxx') }}
+        - ${{ compiler("c") }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - pkg-config
         - cmake
-        - make  # [not win]
+        - if: not win
+          then: make
       host:
         - brotli
         - libhwy
@@ -84,11 +93,13 @@ outputs:
         - openexr
         - libpng
         - zlib  # by libpng
-        - {{ pin_subpackage('libjxl', exact=True) }}
+        - ${{ pin_subpackage("libjxl", exact=True) }}
       run:
-        - {{ pin_subpackage('libjxl', exact=True) }}
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
+        - ${{ pin_subpackage("libjxl", exact=True) }}
+    script:
+      if: win
+      then: install.bat
+      else: install.sh
     test:
       commands:
         - cjxl --version
@@ -98,8 +109,9 @@ outputs:
         - jxlinfo --help
 
         # Encode & decode tests
-        - printf "P6 1 1 63 000" > test.ppm  # [not win]
-        - echo | set /p dummy="P6 1 1 63 000" > test.ppm  # [win]
+        - if: win
+          then: echo | set /p dummy="P6 1 1 63 000" > test.ppm
+          else: printf "P6 1 1 63 000" > test.ppm
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
         - jxlinfo test.jxl
