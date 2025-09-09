@@ -27,7 +27,7 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 openexr:
-- '3.3'
+- '3.4'
 target_platform:
 - linux-64
 zip_keys:
