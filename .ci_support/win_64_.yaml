@@ -21,7 +21,7 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 openexr:
-- '3.3'
+- '3.4'
 target_platform:
 - win-64
 zlib:
