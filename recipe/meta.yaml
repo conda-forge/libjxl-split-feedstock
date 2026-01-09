@@ -12,6 +12,8 @@ source:
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
+      # Backport: fix -lm in pkg-config on Windows/macOS (fixed upstream in 0.12+, remove this patch when upgrading)
+      - 0002-backport-fix-lm-pkgconfig.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
@@ -23,7 +25,7 @@ source:
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 5
+  number: 6
   script:
     - mkdir build
 
