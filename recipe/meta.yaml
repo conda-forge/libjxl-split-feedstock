@@ -12,8 +12,12 @@ source:
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - 0001-CHECK_EXCLUDE_LIBS.patch
-      # Backport: fix -lm in pkg-config on Windows/macOS (fixed upstream in 0.12+, remove this patch when upgrading)
-      - 0002-backport-fix-lm-pkgconfig.patch
+      # Backport and improve on https://github.com/libjxl/libjxl/commit/3d0a160d34145b890b6a5db71fd601cf4f97547f:
+      # Remove libm dependency when building with Windows/macOS (fixed upstream in 0.12+ partially, but in our case since we use clang it needs to exclude WIN32 and not just MSVC), remove this patch when upgrading after whole fix is in upstream)
+      - 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch
+      # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_cms.cmake
+      # This one has never been fixed upstream as of 9 january 2026.
+      - 0003-FIX_LM_PKGCONFIG_LIBJXL_CMS_CMAKE.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
