@@ -105,7 +105,7 @@ outputs:
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
         - jxlinfo test.jxl
-        - pkg-config --print-esrrors --exact-version "{{ version }}" libjxl
+        - pkg-config --print-errors --exact-version "{{ version }}" libjxl
 
 about:
   home: https://jpeg.org/jpegxl/
