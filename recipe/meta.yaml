@@ -92,6 +92,11 @@ outputs:
     test:
       requires:
         - pkg-config
+        - {{ compiler('c') }}  # [not win]
+        - clang                # [win]
+      files:
+        - test_pkgconfig_link.sh   # [not win]
+        - test_pkgconfig_link.bat  # [win]
       commands:
         - cjxl --version
         - djxl --version
@@ -105,7 +110,11 @@ outputs:
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
         - jxlinfo test.jxl
+        # tests libjxl correct linking via pkg-config
         - pkg-config --print-errors --exact-version "{{ version }}" libjxl
+        # does a minimal compile/link/test of a program using libjxl
+        - bash test_pkgconfig_link.sh  # [not win]
+        - test_pkgconfig_link.bat      # [win]
 
 about:
   home: https://jpeg.org/jpegxl/
