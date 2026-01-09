@@ -1,6 +1,6 @@
 --- lib/jxl.cmake
 +++ lib/jxl.cmake
-@@ -255,13 +255,17 @@ set(JPEGXL_LIBRARY_REQUIRES
+@@ -270,9 +270,14 @@
      "libhwy libbrotlienc libbrotlidec libjxl_cms")
  
 +# MSVCRT bundles math functions so no explicit libm dependency is required
@@ -17,5 +17,3 @@
 +    set(JPEGXL_PUBLIC_LIBS "-lm ${PKGCONFIG_CXX_LIB}")
 +  endif()
  endif()
- 
- configure_file("${CMAKE_CURRENT_SOURCE_DIR}/jxl/libjxl.pc.in"
