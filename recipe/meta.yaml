@@ -17,6 +17,9 @@ source:
       # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_cms.cmake
       # This one has never been fixed upstream as of 9 january 2026.
       - patches/0003-FIX_LM_PKGCONFIG_LIBJXL_CMS_CMAKE.patch
+      # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_threads.cmake
+      # This one has never been fixed upstream as of 11 january 2026.
+      - patches/0004-FIX_LM_PKGCONFIG_LIBJXL_THREADS_CMAKE.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
