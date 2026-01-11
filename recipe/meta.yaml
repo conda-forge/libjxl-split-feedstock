@@ -11,7 +11,12 @@ source:
     sha256: 1492dfef8dd6c3036446ac3b340005d92ab92f7d48ee3271b5dac1d36945d3d9
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
-      - 0001-CHECK_EXCLUDE_LIBS.patch
+      - patches/0001-CHECK_EXCLUDE_LIBS.patch
+      # Remove libm dependency when building with Windows/macOS (fixed upstream in 0.12+ partially, but in our case since we use clang it needs to exclude WIN32 and not just MSVC), remove this patch when upgrading after whole fix is in upstream)
+      - patches/0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch
+      # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_cms.cmake
+      # This one has never been fixed upstream as of 9 january 2026.
+      - patches/0003-FIX_LM_PKGCONFIG_LIBJXL_CMS_CMAKE.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - git_url: https://skia.googlesource.com/skcms
@@ -23,7 +28,7 @@ source:
     folder: third_party/libjpeg-turbo
 
 build:
-  number: 5
+  number: 6
   script:
     - mkdir build
 
@@ -90,6 +95,13 @@ outputs:
     script: install.sh  # [not win]
     script: install.bat  # [win]
     test:
+      requires:
+        - pkg-config
+        - {{ compiler('c') }}  # [not win]
+        - clang                # [win]
+      files:
+        - test_pkgconfig_link.sh   # [not win]
+        - test_pkgconfig_link.bat  # [win]
       commands:
         - cjxl --version
         - djxl --version
@@ -103,6 +115,11 @@ outputs:
         - cjxl test.ppm test.jxl
         - djxl test.jxl test.ppm
         - jxlinfo test.jxl
+        # tests libjxl correct linking via pkg-config
+        - pkg-config --print-errors --exact-version "{{ version }}" libjxl
+        # does a minimal compile/link/test of a program using libjxl
+        - bash test_pkgconfig_link.sh  # [not win]
+        - test_pkgconfig_link.bat      # [win]
 
 about:
   home: https://jpeg.org/jpegxl/
