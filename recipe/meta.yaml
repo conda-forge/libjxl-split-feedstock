@@ -117,7 +117,7 @@ outputs:
         - jxlinfo test.jxl
         # tests libjxl correct linking via pkg-config
         - pkg-config --print-errors --exact-version "{{ version }}" libjxl
-        # does a minimal compile/link/test of a program using libjxl
+        # does a minimal compile/link/test of a program using libjxl and libjxl_threads
         - bash test_pkgconfig_link.sh  # [not win]
         - test_pkgconfig_link.bat      # [win]
 
