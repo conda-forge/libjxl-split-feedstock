@@ -134,9 +134,9 @@ outputs:
         requirements:
           run:
             - pkg-config
+            - ${{ compiler('c') }}
             - if: win
               then: clang
-              else: ${{ compiler('c') }}
 
 about:
   homepage: https://jpeg.org/jpegxl/
