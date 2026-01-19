@@ -11,12 +11,13 @@ Summary: JPEG XL image format reference implementation
 
 Development: https://github.com/libjxl/libjxl
 
+Documentation: https://libjxl.readthedocs.io/
+
 This repository contains a reference implementation of JPEG XL (encoder and decoder),
 called libjxl. This software library is used by many applications that support JPEG XL.
 
 `libjxl` provides the core library.
 For `cjxl`, `djxl`, `libjxl_extras_codec`, and other tools, use `libjxl-tools`.
-
 
 Current build status
 ====================
