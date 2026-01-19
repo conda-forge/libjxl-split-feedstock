@@ -129,10 +129,8 @@ outputs:
             - pkg-config
       - script:
           # does a minimal compile/link/test of a program using libjxl and libjxl_threads
-          file: test_pkgconfig_link
-        files:
-          recipe:
-            - test_pkgconfig_link.*
+          # automatic file extension does not seem to work here
+          file: test_pkgconfig_link.${{ "bat" if win else "sh" }}
         requirements:
           run:
             - pkg-config
