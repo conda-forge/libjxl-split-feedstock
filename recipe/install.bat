@@ -1,5 +1,6 @@
 setlocal EnableDelayedExpansion
 
+mkdir build
 cd build
 
 cmake %CMAKE_ARGS% ^
