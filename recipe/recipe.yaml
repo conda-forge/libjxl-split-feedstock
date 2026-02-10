@@ -1,5 +1,5 @@
 context:
-  version: "0.11.1"
+  version: "0.11.2"
   skcms_version: "42030a771244ba67f86b1c1c76a6493f873c5f91"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
@@ -9,7 +9,7 @@ recipe:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
-    sha256: 1492dfef8dd6c3036446ac3b340005d92ab92f7d48ee3271b5dac1d36945d3d9
+    sha256: ab38928f7f6248e2a98cc184956021acb927b16a0dee71b4d260dc040a4320ea
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - patches/0001-CHECK_EXCLUDE_LIBS.patch
@@ -32,7 +32,7 @@ source:
     target_directory: third_party/libjpeg-turbo
 
 build:
-  number: 8
+  number: 0
 
 outputs:
   - package:
@@ -61,20 +61,19 @@ outputs:
         - libhwy
     tests:
       - script:
-        - if: win
-          then:
-            - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
-            - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
-            - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
-          else:
-            - test -f "$PREFIX"/include/jxl/encode.h
-            - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
-            - test ! -f "$PREFIX"/bin/cjxl
+          - if: win
+            then:
+              - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
+              - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
+              - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
+              - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
+            else:
+              - test -f "$PREFIX"/include/jxl/encode.h
+              - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
+              - test ! -f "$PREFIX"/bin/cjxl
 
         # CFEP-18: Static libs shouldn't be part of the main package
-        - if: win
-          then: if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
-          else: test ! -f "$PREFIX"/lib/libjxl.a
+              - test ! -f "$PREFIX"/lib/libjxl.a
   - package:
       name: libjxl-tools
     build:
@@ -108,19 +107,19 @@ outputs:
         - ${{ pin_subpackage('libjxl', exact=True) }}
     tests:
       - script:
-        - cjxl --version
-        - djxl --version
-        - cjpegli --help
-        - djpegli --help
-        - jxlinfo --help
+          - cjxl --version
+          - djxl --version
+          - cjpegli --help
+          - djpegli --help
+          - jxlinfo --help
 
         # Encode & decode tests
-        - if: win
-          then: echo | set /p dummy="P6 1 1 63 000" > test.ppm
-          else: printf "P6 1 1 63 000" > test.ppm
-        - cjxl test.ppm test.jxl
-        - djxl test.jxl test.ppm
-        - jxlinfo test.jxl
+          - if: win
+            then: echo | set /p dummy="P6 1 1 63 000" > test.ppm
+            else: printf "P6 1 1 63 000" > test.ppm
+          - cjxl test.ppm test.jxl
+          - djxl test.jxl test.ppm
+          - jxlinfo test.jxl
       - script:
           # tests libjxl correct linking via pkg-config
           - pkg-config --print-errors --exact-version "${{ version }}" libjxl
