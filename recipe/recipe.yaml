@@ -1,6 +1,6 @@
 context:
   version: "0.11.2"
-  skcms_version: "42030a771244ba67f86b1c1c76a6493f873c5f91"
+  skcms_version: "b2e692629c1fb19342517d7fb61f1cf83d075492"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
 recipe:
@@ -66,13 +66,13 @@ outputs:
               - if not exist %LIBRARY_INC%\\jxl\\encode.h exit 1
               - if not exist %LIBRARY_BIN%\\jxl.dll exit 1
               - if exist %LIBRARY_BIN%\\cjxl.exe exit 1
+              # CFEP-18: Static libs shouldn't be part of the main package
               - if exist %LIBRARY_LIB%\\jxl-static.lib exit 1
             else:
               - test -f "$PREFIX"/include/jxl/encode.h
               - test -f "$PREFIX"/lib/libjxl"$SHLIB_EXT"
               - test ! -f "$PREFIX"/bin/cjxl
-
-        # CFEP-18: Static libs shouldn't be part of the main package
+              # CFEP-18: Static libs shouldn't be part of the main package
               - test ! -f "$PREFIX"/lib/libjxl.a
   - package:
       name: libjxl-tools
