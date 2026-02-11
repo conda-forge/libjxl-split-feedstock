@@ -24,7 +24,7 @@ source:
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - url: https://github.com/google/skcms/archive/${{ skcms_version }}.tar.gz
-    sha256: f070f9f7ac770ea2aab977cdc628e087a0eabaae9dd04883a511dfd6e37232b5
+    sha256: 96e274f403135c19ad4e7f9272f03a64c0aa5615591b087457e7fd0a5f14af23
     target_directory: third_party/skcms
   # They pull in 3 headers from here and copy them into jpegli
   - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${{ jpeg_turbo_version }}.tar.gz
