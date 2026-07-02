@@ -1,5 +1,5 @@
 context:
-  version: "0.11.2"
+  version: "0.12.0"
   skcms_version: "b2e692629c1fb19342517d7fb61f1cf83d075492"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
@@ -9,7 +9,7 @@ recipe:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
-    sha256: ab38928f7f6248e2a98cc184956021acb927b16a0dee71b4d260dc040a4320ea
+    sha256: 03e9be69a30be4011f559da75328b6d7cea8ad921fabfbd551ce10bf45cdc992
     patches:
       # Fix https://github.com/libjxl/libjxl/pull/582
       - patches/0001-CHECK_EXCLUDE_LIBS.patch
@@ -32,7 +32,7 @@ source:
     target_directory: third_party/libjpeg-turbo
 
 build:
-  number: 1
+  number: 0
 
 outputs:
   - package:
