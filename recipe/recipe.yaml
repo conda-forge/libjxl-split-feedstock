@@ -11,8 +11,6 @@ source:
   - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
     sha256: 03e9be69a30be4011f559da75328b6d7cea8ad921fabfbd551ce10bf45cdc992
     patches:
-      # Fix https://github.com/libjxl/libjxl/pull/582
-      - patches/0001-CHECK_EXCLUDE_LIBS.patch
       # Remove libm dependency when building with Windows/macOS (fixed upstream in 0.12+ partially, but in our case since we use clang it needs to exclude WIN32 and not just MSVC), remove this patch when upgrading after whole fix is in upstream)
       - patches/0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch
       # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_cms.cmake
