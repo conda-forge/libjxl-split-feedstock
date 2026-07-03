@@ -21,6 +21,8 @@ source:
       - patches/0004-FIX_LM_PKGCONFIG_LIBJXL_THREADS_CMAKE.patch
       - if: win
         then: patches/0005-FIX_MSVC_NO_DEFAULT_CAPTURE.patch
+      - if: ppc64le
+        then: patches/0006-FIX_PPCLE64_NO_SIBLING_CALL.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - url: https://github.com/google/skcms/archive/${{ skcms_version }}.tar.gz

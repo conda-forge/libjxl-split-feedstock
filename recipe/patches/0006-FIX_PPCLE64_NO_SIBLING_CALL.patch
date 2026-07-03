@@ -1,0 +1,13 @@
+diff --git a/lib/jxl/transpose-inl.h b/lib/jxl/transpose-inl.h
+index 65362a02..10e7d8de 100644
+--- a/lib/jxl/transpose-inl.h
++++ b/lib/jxl/transpose-inl.h
+@@ -38,7 +38,7 @@ namespace {
+ 
+ // Simple wrapper that ensures that a function will not be inlined.
+ template <typename T, typename... Args>
+-JXL_NOINLINE void NoInlineWrapper(const T& f, const Args&... args) {
++JXL_NOINLINE __attribute__((optimize("no-optimize-sibling-calls"))) void NoInlineWrapper(const T& f, const Args&... args) {
+   return f(args...);
+ }
+ 
