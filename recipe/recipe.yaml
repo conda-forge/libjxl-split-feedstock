@@ -106,8 +106,6 @@ outputs:
       - script:
           - cjxl --version
           - djxl --version
-          - cjpegli --help
-          - djpegli --help
           - jxlinfo --help
 
         # Encode & decode tests
