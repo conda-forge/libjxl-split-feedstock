@@ -82,7 +82,7 @@ outputs:
     requirements:
       ignore_run_exports:
         by_name:
-          - libbrotlicommon
+          - brotli
           - libzlib
       build:
         - ${{ compiler('c') }}
@@ -93,6 +93,7 @@ outputs:
         - if: not win
           then: make
       host:
+        - brotli
         - libhwy
         - giflib
         - libjpeg-turbo
