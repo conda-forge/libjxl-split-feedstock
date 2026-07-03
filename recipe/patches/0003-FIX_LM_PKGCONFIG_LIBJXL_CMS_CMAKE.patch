@@ -14,7 +14,7 @@ diff --git a/lib/jxl_cms.cmake b/lib/jxl_cms.cmake
 index 62d5b651..450b3fcd 100644
 --- a/lib/jxl_cms.cmake
 +++ b/lib/jxl_cms.cmake
-@@ -62,9 +62,12 @@ install(TARGETS jxl_cms
+@@ -70,9 +70,12 @@ install(TARGETS jxl_cms
  
  if (BUILD_SHARED_LIBS)
    set(JPEGXL_REQUIRES_TYPE "Requires.private")
