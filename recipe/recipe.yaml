@@ -82,7 +82,9 @@ outputs:
     requirements:
       ignore_run_exports:
         by_name:
-          - brotli
+          - libbrotlicommon
+          - libbrotlienc
+          - libbrotlidec
           - libzlib
       build:
         - ${{ compiler('c') }}
