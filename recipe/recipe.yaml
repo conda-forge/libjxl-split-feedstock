@@ -106,6 +106,7 @@ outputs:
       - script:
           - cjxl --version
           - djxl --version
+          - jxltran --help
           - jxlinfo --help
 
         # Encode & decode tests
@@ -115,6 +116,7 @@ outputs:
           - cjxl test.ppm test.jxl
           - djxl test.jxl test.ppm
           - jxlinfo test.jxl
+          - jxltran -o test_output.jxl test.jxl
       - script:
           # tests libjxl correct linking via pkg-config
           - pkg-config --print-errors --exact-version "${{ version }}" libjxl
