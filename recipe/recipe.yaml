@@ -1,6 +1,6 @@
 context:
   version: "0.12.0"
-  skcms_version: "b2e692629c1fb19342517d7fb61f1cf83d075492"
+  skcms_version: "96d9171c94b937a1b5f0293de7309ac16311b722"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
 recipe:
@@ -22,7 +22,7 @@ source:
   # No tags, versions, or stable ABIs are exposed in the skcms repo
   # so I don't think it fits well in conda's versioning system.
   - url: https://github.com/google/skcms/archive/${{ skcms_version }}.tar.gz
-    sha256: 96e274f403135c19ad4e7f9272f03a64c0aa5615591b087457e7fd0a5f14af23
+    sha256: 9bb4b5bba0b7c04f6c2bce9ff713d61e23c9a20c4945161ae16290498ad74627
     target_directory: third_party/skcms
   # They pull in 3 headers from here and copy them into jpegli
   - url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/${{ jpeg_turbo_version }}.tar.gz
