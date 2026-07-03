@@ -93,7 +93,6 @@ outputs:
         - if: not win
           then: make
       host:
-        - brotli
         - libhwy
         - giflib
         - libjpeg-turbo
