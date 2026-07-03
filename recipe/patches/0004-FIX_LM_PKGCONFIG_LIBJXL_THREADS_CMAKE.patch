@@ -19,7 +19,7 @@ diff --git a/lib/jxl_threads.cmake b/lib/jxl_threads.cmake
 index 43552fc0..38504bb4 100644
 --- a/lib/jxl_threads.cmake
 +++ b/lib/jxl_threads.cmake
-@@ -90,6 +90,14 @@ else()
+@@ -92,6 +92,14 @@ else()
  endif()
  
  set(JPEGXL_THREADS_LIBRARY_REQUIRES "")
