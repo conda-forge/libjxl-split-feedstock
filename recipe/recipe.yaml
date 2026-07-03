@@ -32,7 +32,7 @@ source:
     target_directory: third_party/libjpeg-turbo
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -44,7 +44,7 @@ outputs:
           JPEGXL_ENABLE_TOOLS: "OFF"
     requirements:
       run_exports:
-        - ${{ pin_subpackage('libjxl', lower_bound='x.x', upper_bound='x') }}
+        - ${{ pin_subpackage('libjxl', max_pin='x.x') }}
       ignore_run_exports:
         by_name:
           - libbrotlicommon
