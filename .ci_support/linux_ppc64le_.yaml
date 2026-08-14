@@ -19,7 +19,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma10
 giflib:
-- '5.2'
+- '6'
 libhwy:
 - '1.4'
 libjpeg_turbo:
