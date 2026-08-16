@@ -3,6 +3,11 @@ set -ex
 mkdir -p build
 cd build
 
+if [[ "$target_platform" == "linux-ppc64le" ]]
+then
+    export CXXFLAGS="$CFLAGS -fno-optimize-sibling-calls"
+fi
+
 cmake ${CMAKE_ARGS} \
     -DCMAKE_FIND_FRAMEWORK:STRING=NEVER \
     -DCMAKE_FIND_APPBUNDLE:STRING=NEVER \
