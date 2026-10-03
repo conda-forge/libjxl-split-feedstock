@@ -32,7 +32,7 @@ source:
     target_directory: third_party/libjpeg-turbo
 
 build:
-  number: 2
+  number: 3
 
 outputs:
   - package:

@@ -17,7 +17,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '15'
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma10
+- quay.io/condaforge/linux-anvil-aarch64:alma10
 giflib:
 - '6'
 libhwy:
@@ -27,7 +27,7 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 openexr:
-- '3.4'
+- '3.5'
 target_platform:
 - linux-aarch64
 zip_keys:
