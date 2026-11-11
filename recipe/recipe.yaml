@@ -1,5 +1,5 @@
 context:
-  version: "0.12.0"
+  version: "0.13.0"
   skcms_version: "96d9171c94b937a1b5f0293de7309ac16311b722"
   jpeg_turbo_version: "8ecba3647edb6dd940463fedf38ca33a8e2a73d1"
 
@@ -9,7 +9,7 @@ recipe:
 
 source:
   - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
-    sha256: 03e9be69a30be4011f559da75328b6d7cea8ad921fabfbd551ce10bf45cdc992
+    sha256: 24d18c9af2d1f5a17730b3f8d3f70a5c16e5ac303f5d9d5fe9dc00cf7ca82af2
     patches:
       # Remove libm dependency when building with Windows/macOS (fixed upstream in 0.12+ partially, but in our case since we use clang it needs to exclude WIN32 and not just MSVC), remove this patch when upgrading after whole fix is in upstream)
       - patches/0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch
@@ -32,7 +32,7 @@ source:
     target_directory: third_party/libjpeg-turbo
 
 build:
-  number: 4
+  number: 0
 
 outputs:
   - package:
