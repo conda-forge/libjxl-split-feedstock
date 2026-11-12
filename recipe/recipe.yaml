@@ -52,7 +52,7 @@ outputs:
         - ${{ compiler('c') }}
         - ${{ stdlib("c") }}
         - ${{ compiler('cxx') }}
-        - pkg-config
+        - pkgconf
         - cmake >=3.16
         - if: not win
           then: make
@@ -92,7 +92,7 @@ outputs:
         - ${{ compiler('c') }}
         - ${{ stdlib("c") }}
         - ${{ compiler('cxx') }}
-        - pkg-config
+        - pkgconf
         - cmake
         - if: not win
           then: make
@@ -127,14 +127,14 @@ outputs:
           - pkg-config --print-errors --exact-version "${{ version }}" libjxl
         requirements:
           run:
-            - pkg-config
+            - pkgconf
       - script:
           # does a minimal compile/link/test of a program using libjxl and libjxl_threads
           # automatic file extension does not seem to work here
           file: test_pkgconfig_link.${{ "bat" if win else "sh" }}
         requirements:
           run:
-            - pkg-config
+            - pkgconf
             - ${{ compiler('c') }}
             - if: win
               then: clang
