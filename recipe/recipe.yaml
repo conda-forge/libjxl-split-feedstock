@@ -11,14 +11,10 @@ source:
   - url: https://github.com/libjxl/libjxl/archive/v${{ version }}.tar.gz
     sha256: 24d18c9af2d1f5a17730b3f8d3f70a5c16e5ac303f5d9d5fe9dc00cf7ca82af2
     patches:
-      # Remove libm dependency when building with Windows/macOS (fixed upstream in 0.12+ partially, but in our case since we use clang it needs to exclude WIN32 and not just MSVC), remove this patch when upgrading after whole fix is in upstream)
+      # We are using Clang, which ignores `-lm`,
+      # but downstream packages might be using MSVC, which rejects `-lm`.
+      # Upstream excludes it only when using MSVC.
       - patches/0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch
-      # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_cms.cmake
-      # This one has never been fixed upstream as of 9 january 2026.
-      - patches/0003-FIX_LM_PKGCONFIG_LIBJXL_CMS_CMAKE.patch
-      # Similar to 0002-BACKPORT_FIX_LM_PKGCONFIG_LIBJXL_CMAKE.patch but for libjxl_threads.cmake
-      # This one has never been fixed upstream as of 11 january 2026.
-      - patches/0004-FIX_LM_PKGCONFIG_LIBJXL_THREADS_CMAKE.patch
       - if: win
         then: patches/0005-FIX_MSVC_NO_DEFAULT_CAPTURE.patch
   # No tags, versions, or stable ABIs are exposed in the skcms repo

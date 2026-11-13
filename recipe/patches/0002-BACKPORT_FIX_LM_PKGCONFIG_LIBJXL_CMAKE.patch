@@ -1,3 +1,15 @@
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -179,8 +179,8 @@
+ endif()
+
+ # MSVCRT bundles math functions so no explicit libm dependency is required.
+-if(MSVC)
++if(WIN32)
+   set(PKGCONFIG_MATH_LIB "")
+ else()
+   set(PKGCONFIG_MATH_LIB "-lm")
+ endif()
 --- a/lib/jxl.cmake
 +++ b/lib/jxl.cmake
 @@ -283,12 +283,12 @@ set(JPEGXL_LIBRARY_REQUIRES
